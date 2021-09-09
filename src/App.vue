@@ -4,8 +4,7 @@
       <router-link to="/">Todo</router-link> |
       <router-link to="/about">About</router-link> |
       <router-link to="/posts">Posts</router-link> |
-      <router-link to="/posts/new" exact>New Post </router-link> |
-      <router-link to="/posts/detail" exact>Detail Post </router-link>
+      <router-link to="/posts/new" exact>New Post </router-link>
     </div>
     <router-view />
   </div>
