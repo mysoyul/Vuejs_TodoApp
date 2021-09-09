@@ -60,6 +60,12 @@ export const store = new Vuex.Store({
                 .then(items => context.commit('setTodoItems', items))
                 .catch(err => console.log('Error : ' + err));
         },
+        clearTodo(context) {
+            axios.delete(`${api_url}`)
+                .then(res => res.data)
+                .then(items => context.commit('setTodoItems', items))
+                .catch(err => console.log('Error : ' + err));
+    }
     },    
     //Setters 메서드
     mutations: {
