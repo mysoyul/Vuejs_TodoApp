@@ -6,7 +6,7 @@ import { store } from '../store/store';
         <transition-group name="list" tag="ul">
             <li v-for="(todoItem, index) in getTodoItems" :key="index" class="shadow">
                 <i class="fas fa-check checkBtn" :class="{checkBtnCompleted: todoItem.completed}" 
-                    @click="toggleTodo({todoItem,index})"></i>
+                    @click="toggleTodo(todoItem)"></i>
                 <span :class="{textCompleted: todoItem.completed}">{{todoItem.item}}</span>
                 <span class="removeBtn" @click="removeTodo(todoItem)">
                     <i class="fas fa-trash-alt"></i>
@@ -18,7 +18,7 @@ import { store } from '../store/store';
 </template>
 
 <script>
-import { mapGetters, mapActions, mapMutations } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {  
     /* LifeCycle method */
@@ -31,7 +31,11 @@ export default {
     },
     methods: {
         ...mapActions(['removeTodo']),
-        ...mapMutations(['toggleTodo']),
+        toggleTodo(todoItem) {
+          const todo = {...todoItem, completed:!todoItem.completed};
+          this.$store.dispatch('toggleTodo', todo);
+        }
+        //...mapMutations(['toggleTodo']),
         // removeTodo(todoItem, index) {
         //     //this.$emit('removeEvent', todoItem, index);
         //     this.$store.commit('removeTodo', {todoItem, index});

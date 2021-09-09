@@ -53,7 +53,13 @@ export const store = new Vuex.Store({
                 .then(res => res.data)
                 .then(items => context.commit('setTodoItems', items))
                 .catch(err => console.log('Error : ' + err));
-        }
+        },
+        toggleTodo(context, payload) {
+            axios.put(`${api_url}/${payload.id}`, payload)
+                .then(res => res.data)
+                .then(items => context.commit('setTodoItems', items))
+                .catch(err => console.log('Error : ' + err));
+        },
     },    
     //Setters 메서드
     mutations: {
