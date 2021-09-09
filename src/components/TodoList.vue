@@ -6,9 +6,9 @@ import { store } from '../store/store';
         <transition-group name="list" tag="ul">
             <li v-for="(todoItem, index) in getTodoItems" :key="todoItem.item" class="shadow">
                 <i class="fas fa-check checkBtn" :class="{checkBtnCompleted: todoItem.completed}" 
-                    @click="toggleComplete(todoItem,index)"></i>
+                    @click="toggleTodo({todoItem,index})"></i>
                 <span :class="{textCompleted: todoItem.completed}">{{todoItem.item}}</span>
-                <span class="removeBtn" @click="removeTodo(todoItem, index)">
+                <span class="removeBtn" @click="removeTodo({todoItem, index})">
                     <i class="fas fa-trash-alt"></i>
                 </span>
             </li>
@@ -18,7 +18,7 @@ import { store } from '../store/store';
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 
 export default {  
     /* 사용자 정의 method */
@@ -26,14 +26,15 @@ export default {
       ...mapGetters(['getTodoItems'])
     },
     methods: {
-        removeTodo(todoItem, index) {
-            //this.$emit('removeEvent', todoItem, index);
-            this.$store.commit('removeTodo', {todoItem, index});
-        },
-        toggleComplete(todoItem, index) {
-            //this.$emit('toggleEvent', todoItem, index);
-            this.$store.commit('toggleTodo', {todoItem, index});
-        }
+        ...mapMutations(['removeTodo', 'toggleTodo']),
+        // removeTodo(todoItem, index) {
+        //     //this.$emit('removeEvent', todoItem, index);
+        //     this.$store.commit('removeTodo', {todoItem, index});
+        // },
+        // toggleComplete(todoItem, index) {
+        //     //this.$emit('toggleEvent', todoItem, index);
+        //     this.$store.commit('toggleTodo', {todoItem, index});
+        // }
     },
 
 }
