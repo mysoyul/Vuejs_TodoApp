@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import Posts from '../views/Posts.vue';
+import PostNew from '../views/PostNew.vue';
+import PostDetail from '../views/PostDetail.vue';
 
 Vue.use(VueRouter)
 
@@ -17,7 +20,15 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+  },
+  {
+    path: '/posts', component: Posts,
+    children: [
+      { path: 'new', component: PostNew },
+      { path: ':id', name: 'post', component: PostDetail }
+    ]
   }
+
 ]
 
 const router = new VueRouter({
