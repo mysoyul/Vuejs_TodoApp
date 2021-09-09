@@ -4,7 +4,7 @@ import { store } from '../store/store';
         <!--ul>li*3 -->
         <!-- <ul> -->
         <transition-group name="list" tag="ul">
-            <li v-for="(todoItem, index) in this.$store.state.todoItems" :key="todoItem.item" class="shadow">
+            <li v-for="(todoItem, index) in getTodoItems" :key="todoItem.item" class="shadow">
                 <i class="fas fa-check checkBtn" :class="{checkBtnCompleted: todoItem.completed}" 
                     @click="toggleComplete(todoItem,index)"></i>
                 <span :class="{textCompleted: todoItem.completed}">{{todoItem.item}}</span>
@@ -18,14 +18,13 @@ import { store } from '../store/store';
 </template>
 
 <script>
-export default {
-    
-    data() {
-        return {
-            
-        }
-    },
+import { mapGetters } from 'vuex';
+
+export default {  
     /* 사용자 정의 method */
+    computed: {
+      ...mapGetters(['getTodoItems'])
+    },
     methods: {
         removeTodo(todoItem, index) {
             //this.$emit('removeEvent', todoItem, index);

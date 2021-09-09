@@ -22,7 +22,13 @@ export const store = new Vuex.Store({
     state: {
         todoItems: storage.fetch()
     },
-    //Setter 메서드
+    //Getters 메서드
+    getters: {
+        getTodoItems(state) {
+            return state.todoItems;
+        }
+    },
+    //Setters 메서드
     mutations: {
         addTodo(state, todoItem) {
             const obj = { completed: false, item: todoItem };
