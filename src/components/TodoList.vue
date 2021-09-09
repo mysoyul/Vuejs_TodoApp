@@ -21,6 +21,10 @@ import { store } from '../store/store';
 import { mapGetters, mapMutations } from 'vuex';
 
 export default {  
+    /* LifeCycle method */
+    mounted() {
+      this.$store.dispatch('loadTodoItems');
+    },
     /* 사용자 정의 method */
     computed: {
       ...mapGetters(['getTodoItems'])
