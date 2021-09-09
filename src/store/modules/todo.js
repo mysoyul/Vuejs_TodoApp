@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const api_url = 'http://localhost:4500/api/todos';
+const api_url = process.env.VUE_APP_APIURL;
+const todo_url = `${api_url}/api/todos`;
+    //'http://localhost:4500/api/todos';
 
 //상태변수
 const state = {
@@ -15,31 +17,31 @@ const getters = {
 //actions 메서드
 const actions =  {
     loadTodoItems(context) {
-        axios.get(`${api_url}`)
+        axios.get(`${todo_url}`)
             .then(res => res.data)
             .then(items => context.commit('setTodoItems', items))
             .catch(err => console.log('Error : ' + err));
     },
     removeTodo(context, payload) {
-        axios.delete(`${api_url}/${payload.id}`)
+        axios.delete(`${todo_url}/${payload.id}`)
             .then(res => res.data)
             .then(items => context.commit('setTodoItems', items))
             .catch(err => console.log('Error : ' + err));
     },
     addTodo(context, payload) {
-        axios.post(`${api_url}`, payload)
+        axios.post(`${todo_url}`, payload)
             .then(res => res.data)
             .then(items => context.commit('setTodoItems', items))
             .catch(err => console.log('Error : ' + err));
     },
     toggleTodo(context, payload) {
-        axios.put(`${api_url}/${payload.id}`, payload)
+        axios.put(`${todo_url}/${payload.id}`, payload)
             .then(res => res.data)
             .then(items => context.commit('setTodoItems', items))
             .catch(err => console.log('Error : ' + err));
     },
     clearTodo(context) {
-        axios.delete(`${api_url}`)
+        axios.delete(`${todo_url}`)
             .then(res => res.data)
             .then(items => context.commit('setTodoItems', items))
             .catch(err => console.log('Error : ' + err));

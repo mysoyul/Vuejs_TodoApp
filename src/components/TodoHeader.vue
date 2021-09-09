@@ -1,9 +1,18 @@
 <template>
     <header>
-        <h1>TODO it!</h1>
+        <h1>TODO it! ({{title}})</h1>
     </header>
 </template>
 
+<script>
+export default {
+    data() {
+        return {
+            title: process.env.VUE_APP_TITLE
+        }
+    },
+}
+</script>
 
 <style scoped>
     h1 {
