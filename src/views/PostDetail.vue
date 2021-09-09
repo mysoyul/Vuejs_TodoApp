@@ -28,8 +28,9 @@ export default {
   methods: {
     fetchData() {
       this.loading = true;
-      this.$store.dispatch('loadPost', {id:this.$route.params.id} )
-      this.loading = false;
+      this.$store.dispatch('loadPost', {id:this.$route.params.id} ).then(() => {
+        this.loading = false;
+      });
     },
   },
 };

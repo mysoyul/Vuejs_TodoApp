@@ -33,10 +33,11 @@ export default {
     onSubmit() {
       this.isSaving = true;
       const post = { text: this.inputTxt };
-      this.$store.dispatch("addPost", post);
-      this.isSaving = false;
-      this.inputTxt = "";
-      this.$router.push("/posts");
+      this.$store.dispatch("addPost", post).then(() => {
+        this.isSaving = false;
+        this.inputTxt = "";
+        this.$router.push("/posts");
+      });
     },
   },
 };
